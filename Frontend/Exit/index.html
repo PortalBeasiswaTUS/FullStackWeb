@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Beasiswa - Exit Confirmation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .sidebar {
+            width: 240px;
+            background-color: #B22222;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            line-height: 1.2;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid white;
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .university-info {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            opacity: 0.7;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-actions a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+        }
+
+        .header-actions a i {
+            font-size: 1.2rem;
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #B22222;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+        }
+
+        .hamburger-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        /* Exit Confirmation Modal */
+        .exit-modal {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            background-color: #ffd7d7;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .avatar-image {
+            width: 130px;
+            height: 130px;
+        }
+
+        .exit-message {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            width: 100%;
+            gap: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-stay {
+            background-color: white;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn-stay:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-logout {
+            background-color: #B22222;
+            color: white;
+        }
+
+        .btn-logout:hover {
+            background-color: #8e1c1c;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -240px;
+                top: 0;
+                height: 100%;
+                z-index: 100;
+                transition: left 0.3s;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+
+            .header-title {
+                font-size: 1.2rem;
+            }
+
+            .exit-modal {
+                width: 90%;
+                max-width: 400px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            Portal Beasiswa<br>Telkom University
+        </div>
+        <div class="menu">
+            <a href="#" class="menu-item">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-file-alt"></i>
+                Scholarship Application
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-history"></i>
+                Application History
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-bell"></i>
+                Notifications
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-question-circle"></i>
+                Guide & QnA
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-user"></i>
+                Profile
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-address-book"></i>
+                Contact Person
+            </a>
+            <a href="#" class="menu-item active">
+                <i class="fas fa-sign-out-alt"></i>
+                Exit
+            </a>
+        </div>
+        <div class="university-info">
+            <div>Telkom University</div>
+            <div>Surabaya</div>
+            <div class="copyright">Copyright @2025</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="header-title"></div>
+            <div class="header-actions">
+                <a href="#" title="Help">
+                    <i class="fas fa-question-circle"></i>
+                </a>
+                <a href="#" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">2</span>
+                </a>
+                <a href="#" title="Messages">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <div class="user-avatar">
+                    S
+                </div>
+            </div>
+        </div>
+
+        <!-- Exit Confirmation Modal -->
+        <div class="modal-overlay" id="exitModal">
+            <div class="exit-modal">
+                <div class="avatar-container">
+                    <!-- MASUKIN IMAGE DISINI -->
+                    <img src="avatar.png" class="avatar-image" alt="User Avatar">
+                </div>
+                <div class="exit-message">
+                    Are you sure you want to exit?
+                </div>
+                <div class="button-container">
+                    <button class="btn btn-stay" id="stayButton">Stay</button>
+                    <button class="btn btn-logout" id="logoutButton">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const sidebar = document.getElementById('sidebar');
+            
+            hamburgerMenu.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+            });
+
+            // Exit modal functionality
+            const exitModal = document.getElementById('exitModal');
+            const stayButton = document.getElementById('stayButton');
+            const logoutButton = document.getElementById('logoutButton');
+            
+            // Show modal automatically on page load for the exit page
+            // exitModal.style.display = 'flex';
+
+            // Stay button handler
+            stayButton.addEventListener('click', function() {
+                window.location.href = 'index.html'; // Redirect to home or previous page
+            });
+
+            // Logout button handler
+            logoutButton.addEventListener('click', function() {
+                // Perform logout actions
+                alert('Logging out...');
+                window.location.href = 'login.html'; // Redirect to login page
+            });
+
+            // Close modal if clicking outside of it (optional feature)
+            // exitModal.addEventListener('click', function(e) {
+            //     if (e.target === exitModal) {
+            //         window.location.href = 'index.html';
+            //     }
+            // });
+
+            // For demo purposes: Press ESC to close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    window.location.href = 'index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
