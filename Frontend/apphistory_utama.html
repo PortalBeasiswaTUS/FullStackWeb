@@ -1,0 +1,333 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Portal Beasiswa - Application History
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-white text-gray-900">
+  <div class="flex min-h-screen">
+   <!-- Sidebar -->
+    <aside class="bg-[#B2222B] w-72 flex flex-col justify-between">
+      <div>
+        <div class="px-6 py-8 border-b border-white/50">
+          <h1 class="text-white font-extrabold text-xl leading-none">
+            Portal Beasiswa
+          </h1>
+          <p class="text-white font-semibold text-sm mt-1">Telkom University</p>
+        </div>
+        <nav class="mt-6 flex flex-col space-y-4 px-6 text-white text-sm font-normal">
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="home_utama.html"
+          ><i class="fas fa-home text-lg"></i> Home</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="appprogres_lattersubmit.html"
+          ><i class="fas fa-plus-square text-sm"></i> Scholarship Application</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md bg-[#8b1a2a] font-semibold text-white"
+          href="apphistory_utama.html"
+          ><i class="fas fa-history text-sm"></i> Application History</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="notif_utama.html"
+          ><i class="fas fa-bell text-sm"></i> Notifications</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="guide_utama.html"
+          ><i class="fas fa-question-circle text-sm"></i> Guide &amp; QnA</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="profil_utama.html"
+          ><i class="fas fa-user text-sm"></i> Profile</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="cp_utama.html"
+          ><i class="fas fa-envelope text-sm"></i> Contact Person</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="exit.html"
+          ><i class="fas fa-sign-out-alt text-sm"></i> Exit</a>
+        </nav>
+      </div>
+      <div class="px-6 pb-8 text-white text-center">
+        <p class="font-extrabold text-base leading-tight">
+          Telkom University
+          <br />
+          Surabaya
+        </p>
+        <p class="text-sm mt-1">Copyright @2025</p>
+      </div>
+    </aside>
+   <!-- Main content -->
+   <div class="flex-1 flex flex-col min-h-screen">
+    <!-- Top bar -->
+  <header class="flex items-center justify-end bg-white px-6 h-16 border-b border-gray-200 space-x-4">
+  <!-- Tombol Menu (hanya muncul di mobile) -->
+  <button aria-label="Menu" class="text-gray-700 text-xl lg:hidden absolute left-4">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Semua elemen kanan -->
+  <button aria-label="Globe" class="text-gray-600 text-lg">
+    <i class="fas fa-globe"></i>
+  </button>
+  <button aria-label="Help" class="text-gray-600 text-lg">
+    <i class="fas fa-question-circle"></i>
+  </button>
+  <button aria-label="Notifications" class="relative text-gray-600 text-lg">
+    <i class="fas fa-bell"></i>
+    <span class="absolute -top-1 -right-1 bg-[#b22234] text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+  </button>
+  <button aria-label="Messages" class="text-gray-600 text-lg">
+    <i class="fas fa-envelope"></i>
+  </button>
+  <div class="flex items-center space-x-2">
+    <div class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold text-sm">S</div>
+    <span class="text-gray-900 font-normal select-text">Shinta</span>
+  </div>
+</header>
+    <!-- Content -->
+    <main class="flex-1 p-8 overflow-auto">
+     <h2 class="text-3xl font-extrabold mb-2">
+      Application History
+     </h2>
+     <p class="text-gray-600 mb-8 max-w-xl">
+      Track all your scholarship applications in one place
+     </p>
+     <!-- Stats cards -->
+     <div class="flex flex-wrap gap-6 mb-10 max-w-5xl">
+      <div class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-6 w-[13.5rem]">
+       <div>
+        <p class="text-gray-700 text-sm mb-1">
+         Total Applications
+        </p>
+        <p class="font-extrabold text-2xl leading-none">
+         24
+        </p>
+       </div>
+       <div aria-hidden="true" class="bg-blue-200 rounded-full p-3 flex items-center justify-center">
+        <img alt="Blue document icon representing total applications" decoding="async" height="24" loading="lazy" src="https://storage.googleapis.com/a1aa/image/26342691-e26d-4047-e158-8e48624b52f8.jpg" width="24"/>
+       </div>
+      </div>
+      <div class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-6 w-[13.5rem]">
+       <div>
+        <p class="text-gray-700 text-sm mb-1">
+         Pending
+        </p>
+        <p class="font-extrabold text-2xl leading-none">
+         8
+        </p>
+       </div>
+       <div aria-hidden="true" class="bg-yellow-200 rounded-full p-3 flex items-center justify-center">
+        <img alt="Yellow clock icon representing pending status" decoding="async" height="24" loading="lazy" src="https://storage.googleapis.com/a1aa/image/36027ac1-f4a0-4bf3-3e60-ddd74bd95b82.jpg" width="24"/>
+       </div>
+      </div>
+      <div class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-6 w-[13.5rem]">
+       <div>
+        <p class="text-gray-700 text-sm mb-1">
+         Accepted
+        </p>
+        <p class="font-extrabold text-2xl leading-none">
+         12
+        </p>
+       </div>
+       <div aria-hidden="true" class="bg-green-100 rounded-full p-3 flex items-center justify-center">
+        <img alt="Green checkmark icon representing accepted status" decoding="async" height="24" loading="lazy" src="https://storage.googleapis.com/a1aa/image/c25828a3-201e-4d74-f3dd-935e11ba5112.jpg" width="24"/>
+       </div>
+      </div>
+      <div class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-6 w-[13.5rem]">
+       <div>
+        <p class="text-gray-700 text-sm mb-1">
+         Rejected
+        </p>
+        <p class="font-extrabold text-2xl leading-none">
+         4
+        </p>
+       </div>
+       <div aria-hidden="true" class="bg-[#B22234] rounded-full p-3 flex items-center justify-center text-white text-2xl font-bold select-none leading-none">
+        ×
+       </div>
+      </div>
+     </div>
+     <!-- Table container -->
+     <section class="bg-white border border-gray-200 rounded-lg max-w-7xl overflow-x-auto">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between p-6 border-b border-gray-100">
+       <h3 class="font-semibold text-gray-900 text-lg mb-4 md:mb-0">
+        Applications List
+       </h3>
+       <div class="flex gap-4 flex-wrap">
+        <label class="relative text-gray-400 focus-within:text-gray-600 block" for="search">
+         <input class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B22234] focus:border-[#B22234] w-64" id="search" placeholder="Search applications..." type="search"/>
+         <span aria-hidden="true" class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+          <i class="fas fa-search">
+          </i>
+         </span>
+        </label>
+        <select aria-label="Filter by status" class="border border-gray-200 rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#B22234] focus:border-[#B22234]">
+         <option>
+          All Status
+         </option>
+         <option>
+          Pending
+         </option>
+         <option>
+          Accepted
+         </option>
+         <option>
+          Rejected
+         </option>
+        </select>
+       </div>
+      </div>
+      <table class="w-full text-left text-gray-700 text-sm">
+       <thead class="bg-gray-50 border-b border-gray-200">
+        <tr>
+         <th class="py-3 px-6 font-semibold">
+          Scholarship Name
+         </th>
+         <th class="py-3 px-6 font-semibold">
+          Application Date
+         </th>
+         <th class="py-3 px-6 font-semibold">
+          Status
+         </th>
+         <th class="py-3 px-6 font-semibold">
+          Amount
+         </th>
+         <th class="py-3 px-6 font-semibold">
+          Actions
+         </th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr class="border-b border-gray-100">
+         <td class="py-4 px-6 flex items-center gap-4">
+          <div aria-hidden="true" class="bg-[#F4D9D7] rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
+           <img alt="Red graduation cap icon inside a circle" decoding="async" height="20" loading="lazy" src="https://storage.googleapis.com/a1aa/image/cf3dc0aa-a767-43a7-bdac-c0eb358238aa.jpg" width="20"/>
+          </div>
+          <div>
+           <p class="font-semibold text-gray-900 leading-tight">
+            Merit Scholarship 2025
+           </p>
+           <p class="text-gray-500 text-xs leading-tight">
+            University of Technology
+           </p>
+          </div>
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          Jan 15, 2025
+         </td>
+         <td class="py-4 px-6">
+          <span class="inline-block bg-yellow-200 text-yellow-800 text-xs font-semibold rounded-full px-3 py-1">
+           Pending
+          </span>
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          Rp1.000.000
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          <a class="text-blue-600 hover:underline font-normal text-sm" href="#">
+           View Details
+          </a>
+         </td>
+        </tr>
+        <tr class="border-b border-gray-100">
+         <td class="py-4 px-6 flex items-center gap-4">
+          <div aria-hidden="true" class="bg-[#F4D9D7] rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
+           <img alt="Red graduation cap icon inside a circle" decoding="async" height="20" loading="lazy" src="https://storage.googleapis.com/a1aa/image/cf3dc0aa-a767-43a7-bdac-c0eb358238aa.jpg" width="20"/>
+          </div>
+          <div>
+           <p class="font-semibold text-gray-900 leading-tight">
+            Excellence Award 2025
+           </p>
+           <p class="text-gray-500 text-xs leading-tight">
+            Global Education Foundation
+           </p>
+          </div>
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          Jan 10, 2025
+         </td>
+         <td class="py-4 px-6">
+          <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold rounded-full px-3 py-1">
+           Accepted
+          </span>
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          Rp1.000.000
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          <a class="text-blue-600 hover:underline font-normal text-sm" href="#">
+           View Details
+          </a>
+         </td>
+        </tr>
+        <tr>
+         <td class="py-4 px-6 flex items-center gap-4">
+          <div aria-hidden="true" class="bg-[#F4D9D7] rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
+           <img alt="Red graduation cap icon inside a circle" decoding="async" height="20" loading="lazy" src="https://storage.googleapis.com/a1aa/image/cf3dc0aa-a767-43a7-bdac-c0eb358238aa.jpg" width="20"/>
+          </div>
+          <div>
+           <p class="font-semibold text-gray-900 leading-tight">
+            Research Grant 2025
+           </p>
+           <p class="text-gray-500 text-xs leading-tight">
+            Science Academy
+           </p>
+          </div>
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          Jan 5, 2025
+         </td>
+         <td class="py-4 px-6">
+          <span class="inline-block bg-[#B22234] text-white text-xs font-semibold rounded-full px-3 py-1">
+           Rejected
+          </span>
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          Rp1.000.000
+         </td>
+         <td class="py-4 px-6 whitespace-nowrap">
+          <a class="text-blue-600 hover:underline font-normal text-sm" href="#">
+           View Details
+          </a>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+      <div class="flex justify-end gap-4 p-6 border-t border-gray-100 text-gray-700 text-sm">
+       <span class="self-center">
+        Showing 1 to 3 of 24 entries
+       </span>
+       <button class="border border-gray-300 rounded-lg px-6 py-2 hover:bg-gray-100 transition" type="button">
+        Previous
+       </button>
+       <button class="bg-[#B22234] text-white rounded-lg px-6 py-2 hover:bg-[#8b1a29] transition" type="button">
+        Next
+       </button>
+      </div>
+     </section>
+    </main>
+   </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,452 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portal Beasiswa Guide & QnA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Hide scrollbar but allow scrolling */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Stepper line behind icons, centered vertically */
+    .stepper-line {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      background-color: #aa202c;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+    /* Container for stepper items */
+    .stepper-container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      max-width: 100%;
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+    /* Step circle */
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      border: 2px solid #aa202c;
+      background-color: white;
+      color: #aa202c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      z-index: 20;
+      position: relative;
+    }
+    /* Active step circle */
+    .step-circle.active {
+      background-color: #aa202c;
+      color: white;
+    }
+    /* Step label */
+    .step-label {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      max-width: 80px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="bg-white text-black">
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="bg-[#B2222B] w-72 flex flex-col justify-between">
+      <div>
+        <div class="px-6 py-8 border-b border-white/50">
+          <h1 class="text-white font-extrabold text-xl leading-none">
+            Portal Beasiswa
+          </h1>
+          <p class="text-white font-semibold text-sm mt-1">Telkom University</p>
+        </div>
+        <nav class="mt-6 flex flex-col space-y-4 px-6 text-white text-sm font-normal">
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="home_utama.html"
+          ><i class="fas fa-home text-lg"></i> Home</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="appprogres_lattersubmit.html"
+          ><i class="fas fa-plus-square text-sm"></i> Scholarship Application</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="apphistory_utama.html"
+          ><i class="fas fa-history text-sm"></i> Application History</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="notif_utama.html"
+          ><i class="fas fa-bell text-sm"></i> Notifications</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md bg-[#8b1a2a] font-semibold text-white"
+          href="guide_utama.html"
+          ><i class="fas fa-question-circle text-sm"></i> Guide &amp; QnA</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="profil_utama.html"
+          ><i class="fas fa-user text-sm"></i> Profile</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="cp_utama.html"
+          ><i class="fas fa-envelope text-sm"></i> Contact Person</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="exit.html"
+          ><i class="fas fa-sign-out-alt text-sm"></i> Exit</a>
+        </nav>
+      </div>
+      <div class="px-6 pb-8 text-white text-center">
+        <p class="font-extrabold text-base leading-tight">
+          Telkom University
+          <br />
+          Surabaya
+        </p>
+        <p class="text-sm mt-1">Copyright @2025</p>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 flex flex-col">
+      <!-- Top bar -->
+      <header class="flex items-center justify-end bg-white px-6 h-16 border-b border-gray-200 space-x-4">
+        <!-- Tombol Menu (hanya muncul di mobile) -->
+        <button aria-label="Menu" class="text-gray-700 text-xl lg:hidden absolute left-4">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Semua elemen kanan -->
+        <button aria-label="Globe" class="text-gray-600 text-lg">
+          <i class="fas fa-globe"></i>
+        </button>
+        <button aria-label="Help" class="text-gray-600 text-lg">
+          <i class="fas fa-question-circle"></i>
+        </button>
+        <button aria-label="Notifications" class="relative text-gray-600 text-lg">
+          <i class="fas fa-bell"></i>
+          <span class="absolute -top-1 -right-1 bg-[#b22234] text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+        </button>
+        <button aria-label="Messages" class="text-gray-600 text-lg">
+          <i class="fas fa-envelope"></i>
+        </button>
+        <div class="flex items-center space-x-2">
+          <div class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold text-sm">S</div>
+          <span class="text-gray-900 font-normal select-text">Shinta</span>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <section class="flex-1 overflow-auto p-8 bg-white">
+        <h2 class="text-2xl font-extrabold mb-6">Step-by-Step Guide</h2>
+
+        <!-- Cards slider with arrows -->
+        <div class="relative mb-12 max-w-full">
+          <button
+            aria-label="Scroll left"
+            id="scrollLeftBtn"
+            class="absolute top-1/2 -left-2 -translate-y-1/2 z-10 bg-white border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center text-gray-600 hover:text-[#aa202c] shadow"
+          >
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div
+            id="cardsContainer"
+            class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth px-8"
+          >
+            <!-- Card 1 -->
+            <article
+              class="flex-shrink-0 w-72 bg-white rounded-lg shadow-sm p-6 border border-gray-100"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-blue-200 text-blue-600 flex items-center justify-center text-sm"
+                  aria-label="Letter Submission icon"
+                >
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <h3 class="text-base font-normal">Letter Submission</h3>
+              </div>
+              <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                Learn how to properly upload and submit your application letter.
+              </p>
+              <a
+                href="#"
+                class="text-blue-600 text-sm flex items-center gap-1 hover:underline"
+                ><i class="fas fa-download"></i> Download Guide</a
+              >
+            </article>
+
+            <!-- Card 2 -->
+            <article
+              class="flex-shrink-0 w-72 bg-white rounded-lg shadow-sm p-6 border border-gray-100"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-blue-200 text-blue-600 flex items-center justify-center text-sm"
+                  aria-label="Application Form icon"
+                >
+                  <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 class="text-base font-normal">Application Form</h3>
+              </div>
+              <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                Step-by-step instructions for completing the registration form.
+              </p>
+              <a
+                href="#"
+                class="text-blue-600 text-sm flex items-center gap-1 hover:underline"
+                ><i class="fas fa-download"></i> Download Guide</a
+              >
+            </article>
+
+            <!-- Card 3 -->
+            <article
+              class="flex-shrink-0 w-72 bg-white rounded-lg shadow-sm p-6 border border-gray-100"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-blue-200 text-blue-600 flex items-center justify-center text-sm"
+                  aria-label="Selection Status icon"
+                >
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="text-base font-normal">Selection Status</h3>
+              </div>
+              <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                Understanding your application selection results.
+              </p>
+              <a
+                href="#"
+                class="text-blue-600 text-sm flex items-center gap-1 hover:underline"
+                ><i class="fas fa-download"></i> Download Guide</a
+              >
+            </article>
+          </div>
+          <button
+            aria-label="Scroll right"
+            id="scrollRightBtn"
+            class="absolute top-1/2 -right-2 -translate-y-1/2 z-10 bg-white border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center text-gray-600 hover:text-[#aa202c] shadow"
+          >
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <!-- Question and Answer -->
+        <section>
+          <h2 class="text-2xl font-extrabold mb-6">Question and Answer</h2>
+          <form class="mb-6">
+            <label for="search" class="sr-only">Search questions</label>
+            <div class="relative">
+              <input
+                id="search"
+                type="search"
+                placeholder="Search questions..."
+                class="w-full border border-gray-300 rounded-md py-2 pl-10 pr-4 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#aa202c] focus:border-[#aa202c]"
+              />
+              <i
+                class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </form>
+
+          <div class="flex flex-wrap gap-3 mb-6">
+            <button
+              type="button"
+              class="bg-[#aa202c] text-white text-xs rounded-full px-4 py-1 font-normal"
+            >
+              All Questions
+            </button>
+            <button
+              type="button"
+              class="bg-gray-100 text-gray-700 text-xs rounded-full px-4 py-1 font-normal hover:bg-gray-200"
+            >
+              Registration
+            </button>
+            <button
+              type="button"
+              class="bg-gray-100 text-gray-700 text-xs rounded-full px-4 py-1 font-normal hover:bg-gray-200"
+            >
+              Requirements
+            </button>
+            <button
+              type="button"
+              class="bg-gray-100 text-gray-700 text-xs rounded-full px-4 py-1 font-normal hover:bg-gray-200"
+            >
+              Documents
+            </button>
+            <button
+              type="button"
+              class="bg-gray-100 text-gray-700 text-xs rounded-full px-4 py-1 font-normal hover:bg-gray-200"
+            >
+              Selection
+            </button>
+            <button
+              type="button"
+              class="bg-gray-100 text-gray-700 text-xs rounded-full px-4 py-1 font-normal hover:bg-gray-200"
+            >
+              Funding
+            </button>
+          </div>
+
+          <div
+            class="border border-gray-200 rounded-lg max-w-full"
+            role="list"
+          >
+            <div class="border-b border-gray-200">
+              <button
+                type="button"
+                class="w-full text-left px-6 py-3 flex justify-between items-center text-sm"
+                aria-expanded="false"
+                aria-controls="answer1"
+                id="question1"
+              >
+                <span>What are the basic requirements for applying?</span>
+                <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+              </button>
+              <div
+                id="answer1"
+                role="region"
+                aria-labelledby="question1"
+                class="px-6 pb-4 text-gray-700 text-sm hidden"
+              >
+                The basic requirements include a completed application form, academic transcripts, recommendation letters, and a personal statement.
+              </div>
+            </div>
+            <div class="border-b border-gray-200">
+              <button
+                type="button"
+                class="w-full text-left px-6 py-3 flex justify-between items-center text-sm"
+                aria-expanded="false"
+                aria-controls="answer2"
+                id="question2"
+              >
+                <span>How long does the selection process take?</span>
+                <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+              </button>
+              <div
+                id="answer2"
+                role="region"
+                aria-labelledby="question2"
+                class="px-6 pb-4 text-gray-700 text-sm hidden"
+              >
+                The selection process typically takes 4 to 6 weeks after the application deadline.
+              </div>
+            </div>
+            <div class="border-b border-gray-200">
+              <button
+                type="button"
+                class="w-full text-left px-6 py-3 flex justify-between items-center text-sm"
+                aria-expanded="false"
+                aria-controls="answer3"
+                id="question3"
+              >
+                <span>What documents do I need to prepare?</span>
+                <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+              </button>
+              <div
+                id="answer3"
+                role="region"
+                aria-labelledby="question3"
+                class="px-6 pb-4 text-gray-700 text-sm hidden"
+              >
+                You need to prepare your academic transcripts, identification documents, recommendation letters, and any other documents specified in the application guide.
+              </div>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="w-full text-left px-6 py-3 flex justify-between items-center text-sm"
+                aria-expanded="false"
+                aria-controls="answer4"
+                id="question4"
+              >
+                <span>When will I receive the scholarship funds?</span>
+                <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+              </button>
+              <div
+                id="answer4"
+                role="region"
+                aria-labelledby="question4"
+                class="px-6 pb-4 text-gray-700 text-sm hidden"
+              >
+                Scholarship funds are usually disbursed within one month after the final selection results are announced.
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Scroll buttons for cards slider
+    const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+    const scrollRightBtn = document.getElementById('scrollRightBtn');
+    const cardsContainer = document.getElementById('cardsContainer');
+
+    scrollLeftBtn.addEventListener('click', () => {
+      cardsContainer.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+    scrollRightBtn.addEventListener('click', () => {
+      cardsContainer.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+
+    // Dropdown QnA toggle
+    const qnaButtons = document.querySelectorAll('[aria-controls^="answer"]');
+
+    qnaButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const answerId = btn.getAttribute('aria-controls');
+        const answerEl = document.getElementById(answerId);
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+
+        // Close all answers
+        qnaButtons.forEach((b) => {
+          b.setAttribute('aria-expanded', 'false');
+          const aId = b.getAttribute('aria-controls');
+          const aEl = document.getElementById(aId);
+          aEl.classList.add('hidden');
+          b.querySelector('i').classList.remove('rotate-180');
+        });
+
+        if (!expanded) {
+          btn.setAttribute('aria-expanded', 'true');
+          answerEl.classList.remove('hidden');
+          btn.querySelector('i').classList.add('rotate-180');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

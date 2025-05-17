@@ -1,0 +1,323 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Portal Beasiswa Profile
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: "Inter", sans-serif;
+    }
+    .profile-frame {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 9999px;
+      border: 1px solid #C97B7B;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .profile-frame svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 160px;
+      height: 160px;
+      pointer-events: none;
+      color: #C97B7B;
+    }
+    .profile-frame img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 9999px;
+      display: block;
+    }
+  </style>
+ </head>
+ <body class="bg-white text-gray-900">
+  <div class="flex min-h-screen">
+   <!-- Sidebar -->
+        <aside class="bg-[#B2222B] w-72 flex flex-col justify-between">
+      <div>
+        <div class="px-6 py-8 border-b border-white/50">
+          <h1 class="text-white font-extrabold text-xl leading-none">
+            Portal Beasiswa
+          </h1>
+          <p class="text-white font-semibold text-sm mt-1">Telkom University</p>
+        </div>
+        <nav class="mt-6 flex flex-col space-y-4 px-6 text-white text-sm font-normal">
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="home_utama.html"
+          ><i class="fas fa-home text-lg"></i> Home</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="appprogres_lattersubmit.html"
+          ><i class="fas fa-plus-square text-sm"></i> Scholarship Application</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="apphistory_utama.html"
+          ><i class="fas fa-history text-sm"></i> Application History</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="notif_utama.html"
+          ><i class="fas fa-bell text-sm"></i> Notifications</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="guide_utama.html"
+          ><i class="fas fa-question-circle text-sm"></i> Guide &amp; QnA</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md bg-[#8b1a2a] font-semibold text-white"
+          href="profil_utama.html"
+          ><i class="fas fa-user text-sm"></i> Profile</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="cp_utama.html"
+          ><i class="fas fa-envelope text-sm"></i> Contact Person</a
+        >
+        <a
+          class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#8b1a2a] transition-colors"
+          href="exit.html"
+          ><i class="fas fa-sign-out-alt text-sm"></i> Exit</a>
+        </nav>
+      </div>
+      <div class="px-6 pb-8 text-white text-center">
+        <p class="font-extrabold text-base leading-tight">
+          Telkom University
+          <br />
+          Surabaya
+        </p>
+        <p class="text-sm mt-1">Copyright @2025</p>
+      </div>
+    </aside>
+   <!-- Main content -->
+   <div class="flex-1 flex flex-col">
+    <!-- Top bar -->
+    <header class="flex items-center justify-end bg-white px-6 h-16 border-b border-gray-200 space-x-4">
+  <!-- Tombol Menu (hanya muncul di mobile) -->
+  <button aria-label="Menu" class="text-gray-700 text-xl lg:hidden absolute left-4">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Semua elemen kanan -->
+  <button aria-label="Globe" class="text-gray-600 text-lg">
+    <i class="fas fa-globe"></i>
+  </button>
+  <button aria-label="Help" class="text-gray-600 text-lg">
+    <i class="fas fa-question-circle"></i>
+  </button>
+  <button aria-label="Notifications" class="relative text-gray-600 text-lg">
+    <i class="fas fa-bell"></i>
+    <span class="absolute -top-1 -right-1 bg-[#b22234] text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+  </button>
+  <button aria-label="Messages" class="text-gray-600 text-lg">
+    <i class="fas fa-envelope"></i>
+  </button>
+  <div class="flex items-center space-x-2">
+    <div class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold text-sm">S</div>
+    <span class="text-gray-900 font-normal select-text">Shinta</span>
+  </div>
+</header>
+    <!-- Content -->
+    <main class="flex-1 overflow-y-auto p-8">
+     <h2 class="text-2xl font-extrabold mb-8">
+      Profile
+     </h2>
+     <div class="flex flex-col md:flex-row gap-10 max-w-5xl">
+      <!-- Left profile info -->
+      <div class="flex flex-col items-center gap-4 w-full md:w-64">
+       <div class="profile-frame">
+        <img height="160" id="profileImage" width="160"/>
+         <circle cx="32" cy="32" fill="none" r="31" stroke="#C97B7B" stroke-width="1">
+         </circle>
+         <circle cx="32" cy="22" r="10">
+         </circle>
+         <path d="M12 52c0-11 40-11 40 0" fill="none" stroke="#C97B7B" stroke-linecap="round" stroke-width="6">
+         </path>
+        </svg>
+       </div>
+       <label class="flex items-center gap-2 text-blue-600 text-sm font-medium cursor-pointer hover:underline select-none" for="fileInput">
+        <i class="fas fa-camera">
+        </i>
+        Update Photo
+       </label>
+       <input accept="image/*" class="hidden" id="fileInput" onchange="previewImage(event)" type="file"/>
+       <div class="bg-blue-100 text-blue-700 rounded-md px-4 py-1 flex items-center gap-2 text-sm font-semibold select-none">
+        <i class="fas fa-graduation-cap">
+        </i>
+        GPA: 3.9
+       </div>
+       <p class="text-center text-xs leading-tight max-w-[10rem]" id="lastUpdated">
+        Terakhir di update
+        <br/>
+        pada: 01/09/2025
+       </p>
+      </div>
+      <!-- Right profile form -->
+      <form autocomplete="off" class="bg-[#F2D7D7] rounded-lg p-6 flex-1 max-w-3xl" novalidate="" onsubmit="handleSave(event)">
+       <h3 class="font-semibold text-gray-900 mb-4 text-lg">
+        Shinta Putri Nirmala
+       </h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+         <label class="block text-xs text-gray-600 mb-1 font-medium" for="nim">
+          NIM
+         </label>
+         <input class="w-full rounded-md bg-gray-100 border border-transparent px-3 py-2 text-sm text-gray-600 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B2222B]" id="nim" name="nim" placeholder="Ex: 1203230052" type="text"/>
+        </div>
+        <div>
+         <label class="block text-xs text-gray-600 mb-1 font-medium" for="email">
+          Email Address
+         </label>
+         <input class="w-full rounded-md bg-gray-100 border border-transparent px-3 py-2 text-sm text-gray-600 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B2222B]" id="email" name="email" placeholder="Ex: shinta@telkomuniversity.ac.id" type="email"/>
+        </div>
+        <div>
+         <label class="block text-xs text-gray-600 mb-1 font-medium" for="study">
+          Study Program
+         </label>
+         <input class="w-full rounded-md bg-gray-100 border border-transparent px-3 py-2 text-sm text-gray-600 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B2222B]" id="study" name="study" placeholder="Ex: Computer Science" type="text"/>
+        </div>
+        <div>
+         <label class="block text-xs text-gray-600 mb-1 font-medium" for="contact">
+          Contact Number
+         </label>
+         <input class="w-full rounded-md bg-gray-100 border border-transparent px-3 py-2 text-sm text-gray-600 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B2222B]" id="contact" name="contact" placeholder="Ex: 085782017851" type="tel"/>
+        </div>
+        <div>
+         <label class="block text-xs text-gray-600 mb-1 font-medium" for="semester">
+          Current Semester
+         </label>
+         <input class="w-full rounded-md bg-gray-100 border border-transparent px-3 py-2 text-sm text-gray-600 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B2222B]" id="semester" name="semester" placeholder="Ex: 4 (Empat)" type="text"/>
+        </div>
+        <div>
+         <label class="block text-xs text-gray-600 mb-1 font-medium" for="address">
+          Home Address
+         </label>
+         <input class="w-full rounded-md bg-gray-100 border border-transparent px-3 py-2 text-sm text-gray-600 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B2222B]" id="address" name="address" placeholder="Ex: 123 University Ave, Academic City, ST 12345" type="text"/>
+        </div>
+       </div>
+       <div class="mt-6 flex gap-4">
+        <button class="bg-[#B2222B] text-white rounded-md px-6 py-2 text-sm font-medium hover:bg-[#8a1a1a] transition-colors" type="submit">
+         Save
+        </button>
+        <button class="bg-white border border-gray-300 rounded-md px-6 py-2 text-sm font-medium hover:bg-gray-100 transition-colors" onclick="resetLastUpdated()" type="reset">
+         Reset Profile
+        </button>
+       </div>
+      </form>
+     </div>
+     <!-- Cards -->
+     <div aria-label="Scholarship and application summary" class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl" role="region">
+      <div aria-labelledby="available-scholarships" class="bg-white rounded-lg p-6 shadow-sm relative overflow-visible">
+       <div aria-hidden="true" class="absolute top-4 right-4 bg-blue-100 text-blue-700 rounded-md p-2">
+        <i class="fas fa-graduation-cap">
+        </i>
+       </div>
+       <h4 class="text-[#B2222B] text-sm font-normal mb-2" id="available-scholarships">
+        Available Scholarships
+       </h4>
+       <p class="text-2xl font-extrabold mb-1">
+        24
+       </p>
+       <p class="text-gray-500 text-xs">
+        Open for application
+       </p>
+      </div>
+      <div aria-labelledby="my-applications" class="bg-white rounded-lg p-6 shadow-sm relative overflow-visible">
+       <div aria-hidden="true" class="absolute top-4 right-4 bg-blue-200 text-blue-600 rounded-md p-2">
+        <i class="fas fa-check-square">
+        </i>
+       </div>
+       <h4 class="text-[#B2222B] text-sm font-normal mb-2" id="my-applications">
+        My Applications
+       </h4>
+       <p class="text-2xl font-extrabold mb-1">
+        3
+       </p>
+       <p class="text-gray-500 text-xs">
+        Submitted applications
+       </p>
+      </div>
+      <div aria-labelledby="pending-review" class="bg-white rounded-lg p-6 shadow-sm relative overflow-visible">
+       <div aria-hidden="true" class="absolute top-4 right-4 bg-orange-100 text-orange-600 rounded-md p-2">
+        <i class="fas fa-clock">
+        </i>
+       </div>
+       <h4 class="text-[#B2222B] text-sm font-normal mb-2" id="pending-review">
+        Pending Review
+       </h4>
+       <p class="text-2xl font-extrabold mb-1">
+        2
+       </p>
+       <p class="text-gray-500 text-xs">
+        Awaiting decision
+       </p>
+      </div>
+      <div aria-labelledby="upcoming-deadlines" class="bg-white rounded-lg p-6 shadow-sm relative overflow-visible">
+       <div aria-hidden="true" class="absolute top-4 right-4 bg-red-100 text-red-600 rounded-md p-2">
+        <i class="fas fa-calendar-alt">
+        </i>
+       </div>
+       <h4 class="text-[#B2222B] text-sm font-normal mb-2" id="upcoming-deadlines">
+        Upcoming Deadlines
+       </h4>
+       <p class="text-2xl font-extrabold mb-1">
+        5
+       </p>
+       <p class="text-gray-500 text-xs">
+        Closing this week
+       </p>
+      </div>
+     </div>
+    </main>
+   </div>
+  </div>
+  <script>
+   function previewImage(event) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const profileImage = document.getElementById("profileImage");
+          profileImage.src = e.target.result;
+          updateLastUpdated();
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function updateLastUpdated() {
+      const lastUpdated = document.getElementById("lastUpdated");
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const year = now.getFullYear();
+      lastUpdated.innerHTML = `Terakhir di update<br>pada: ${day}/${month}/${year}`;
+    }
+
+    function handleSave(event) {
+      event.preventDefault();
+      // Here you can add form validation or saving logic if needed
+      updateLastUpdated();
+      alert("Profile data saved!");
+    }
+
+    function resetLastUpdated() {
+      const lastUpdated = document.getElementById("lastUpdated");
+      lastUpdated.innerHTML = "Terakhir di update<br>pada: 01/09/2025";
+    }
+  </script>
+ </body>
+</html>
