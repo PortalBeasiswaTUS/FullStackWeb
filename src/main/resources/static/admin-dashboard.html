@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-2xl font-bold text-red-700 mb-6">Admin Dashboard</h1>
+
+  <!-- List Users -->
+  <div class="bg-white p-4 rounded shadow mb-6">
+    <h2 class="text-xl font-semibold mb-3">Registered Users</h2>
+    <table class="w-full text-left border-collapse">
+      <thead><tr><th>Email</th><th>Role</th><th>Verified</th></tr></thead>
+      <tbody id="users-table" class="text-sm text-gray-700"></tbody>
+    </table>
+  </div>
+
+  <!-- Login Logs -->
+  <div class="bg-white p-4 rounded shadow mb-6">
+    <h2 class="text-xl font-semibold mb-3">Recent Logins</h2>
+    <table class="w-full text-left border-collapse">
+      <thead><tr><th>Email</th><th>Login Time</th></tr></thead>
+      <tbody id="logins-table" class="text-sm text-gray-700"></tbody>
+    </table>
+  </div>
+
+  <!-- Password Update Logs -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-3">Password Updates</h2>
+    <table class="w-full text-left border-collapse">
+      <thead><tr><th>Email</th><th>Updated At</th></tr></thead>
+      <tbody id="pwupdates-table" class="text-sm text-gray-700"></tbody>
+    </table>
+  </div>
+
+  <script>
+    // Fetch Users
+    fetch('/api/admin/users')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('users-table');
+        data.forEach(u => {
+          tbody.innerHTML += `<tr><td>${u.email}</td><td>${u.role}</td><td>${u.verified}</td></tr>`;
+        });
+      });
+
+    // Fetch Login Logs
+    fetch('/api/admin/login-logs')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('logins-table');
+        data.forEach(l => {
+          tbody.innerHTML += `<tr><td>${l.user.email}</td><td>${l.loginTime}</td></tr>`;
+        });
+      });
+
+    // Fetch Password Updates
+    fetch('/api/admin/password-updates')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('pwupdates-table');
+        data.forEach(p => {
+          tbody.innerHTML += `<tr><td>${p.user.email}</td><td>${p.updatedAt}</td></tr>`;
+        });
+      });
+  </script>
+</body>
+</html>
