@@ -14,6 +14,7 @@ public class LoginLog {
     private LocalDateTime loginTime = LocalDateTime.now();
 
     @ManyToOne
+    @JoinColumn(name = "user_id")  // Foreign key yang menghubungkan ke User.id
     private User user;
 
     // Getters & Setters

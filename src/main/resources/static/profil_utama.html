@@ -138,16 +138,14 @@
      <div class="flex flex-col md:flex-row gap-10 max-w-5xl">
       <!-- Left profile info -->
       <div class="flex flex-col items-center gap-4 w-full md:w-64">
-       <div class="profile-frame">
-        <img height="160" id="profileImage" width="160"/>
-         <circle cx="32" cy="32" fill="none" r="31" stroke="#C97B7B" stroke-width="1">
-         </circle>
-         <circle cx="32" cy="22" r="10">
-         </circle>
-         <path d="M12 52c0-11 40-11 40 0" fill="none" stroke="#C97B7B" stroke-linecap="round" stroke-width="6">
-         </path>
+      <div class="profile-frame">
+        <img id="profileImage" width="160" height="160"/>
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="31" stroke="#C97B7B" stroke-width="1" fill="none"/>
+          <circle cx="32" cy="22" r="10"/>
+          <path d="M12 52c0-11 40-11 40 0" stroke="#C97B7B" stroke-width="6" fill="none" stroke-linecap="round"/>
         </svg>
-       </div>
+      </div>
        <label class="flex items-center gap-2 text-blue-600 text-sm font-medium cursor-pointer hover:underline select-none" for="fileInput">
         <i class="fas fa-camera">
         </i>
@@ -285,38 +283,30 @@
    </div>
   </div>
   <script>
-   function previewImage(event) {
-      const input = event.target;
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const profileImage = document.getElementById("profileImage");
-          profileImage.src = e.target.result;
-          updateLastUpdated();
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const img = document.getElementById('profileImage');
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
 
-    function updateLastUpdated() {
-      const lastUpdated = document.getElementById("lastUpdated");
+      // Update last updated date
       const now = new Date();
-      const day = String(now.getDate()).padStart(2, "0");
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const year = now.getFullYear();
-      lastUpdated.innerHTML = `Terakhir di update<br>pada: ${day}/${month}/${year}`;
+      const formatted = now.toLocaleDateString('id-ID');
+      document.getElementById('lastUpdated').innerHTML = `Terakhir di update<br/>pada: ${formatted}`;
     }
 
     function handleSave(event) {
       event.preventDefault();
-      // Here you can add form validation or saving logic if needed
-      updateLastUpdated();
-      alert("Profile data saved!");
+      alert("Profile saved successfully!");
+      const now = new Date();
+      const formatted = now.toLocaleDateString('id-ID');
+      document.getElementById('lastUpdated').innerHTML = `Terakhir di update<br/>pada: ${formatted}`;
     }
 
     function resetLastUpdated() {
-      const lastUpdated = document.getElementById("lastUpdated");
-      lastUpdated.innerHTML = "Terakhir di update<br>pada: 01/09/2025";
+      document.getElementById('lastUpdated').innerHTML = `Terakhir di update<br/>pada: -`;
     }
   </script>
  </body>

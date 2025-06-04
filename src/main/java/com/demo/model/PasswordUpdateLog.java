@@ -11,9 +11,11 @@ public class PasswordUpdateLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     @ManyToOne
+    @JoinColumn(name = "user_id")  // Menentukan nama kolom yang menjadi foreign key
     private User user;
 
     // Getters & Setters

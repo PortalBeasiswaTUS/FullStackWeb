@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - GPA Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Menghilangkan spinner pada input number */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 md:p-8 text-sm">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg">
+        <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-[#C41E3A]">Registration Form</h1>
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-semibold">1</span>
+                    <span class="w-8 h-8 rounded-full bg-[#C41E3A] text-white flex items-center justify-center font-semibold">2</span>
+                </div>
+            </div>
+            <p class="text-gray-600 mt-2">Please complete all required fields below to register as a prospective student. All information will remain confidential and used only for official purposes.</p>
+        </div>
+
+        <div class="p-6 pt-0">
+            <form id="gpaForm" onsubmit="return validateForm(event)" class="space-y-6">
+                <script>
+                    function validateForm(event) {
+                        // Validasi Semester 1 GPA (wajib)
+                        const semester1 = document.getElementById('semester1').value;
+                        if (!semester1) {
+                            alert('Semester 1 GPA is required');
+                            document.getElementById('semester1').focus();
+                            return false;
+                        }
+
+                        // Validasi nilai GPA (antara 0 dan 4)
+                        const gpaInputs = document.querySelectorAll('input[type="number"]');
+                        for (const input of gpaInputs) {
+                            if (input.value) {
+                                const gpa = parseFloat(input.value);
+                                if (gpa < 0 || gpa > 4) {
+                                    alert('GPA must be between 0 and 4');
+                                    input.focus();
+                                    return false;
+                                }
+                            }
+                        }
+
+                        // Validasi file transkrip
+                        const transcript = document.getElementById('transcript');
+                        if (!transcript.files.length) {
+                            alert('Please upload your transcript');
+                            return false;
+                        }
+
+                        const file = transcript.files[0];
+                        if (file.type !== 'application/pdf') {
+                            alert('Please upload a PDF file');
+                            return false;
+                        }
+
+                        const maxSize = 5 * 1024 * 1024; // 5MB
+                        if (file.size > maxSize) {
+                            alert('File size must be less than 5MB');
+                            return false;
+                        }
+
+                        // Mengambil data dari sessionStorage dan menambahkannya ke form data
+                        const full_name = sessionStorage.getItem('fullName');
+                        const nim = sessionStorage.getItem('nim');
+                        const year_of_entry = sessionStorage.getItem('yearOfEntry');
+                        const study_program = sessionStorage.getItem('studyProgram');
+                        const faculty = sessionStorage.getItem('faculty');
+                        const email = sessionStorage.getItem('email');
+                        const whatsapp = sessionStorage.getItem('whatsapp');
+                        const password = sessionStorage.getItem('password');
+                        const address = sessionStorage.getItem('address');
+
+                        // Membuat objek JSON untuk dikirim ke backend
+                        let jsonData = {
+                            fullName: full_name,
+                            nim: nim,
+                            yearOfEntry: year_of_entry,
+                            studyProgram: study_program,
+                            faculty: faculty,
+                            email: email,
+                            whatsapp: whatsapp,
+                            password: password,
+                            address: address,
+                            semester1: document.getElementById('semester2').value,
+                            semester2: document.getElementById('semester2').value,
+                            semester3: document.getElementById('semester3').value,
+                            semester4: document.getElementById('semester4').value,
+                            semester5: document.getElementById('semester5').value,
+                            semester6: document.getElementById('semester6').value,
+                            semester7: document.getElementById('semester7').value,
+                            semester8: document.getElementById('semester8').value,
+                            transcript: transcript.files[0]
+                        };
+
+                        // Kirim data menggunakan AJAX
+                        fetch('/api/users/register', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(jsonData)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Data successfully saved!');
+                                window.location.href = 'AdminUser.html'; // Redirect to AdminUser page
+                            } else {
+                                alert('Error: ' + data.message);
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+
+                        return false; // Mencegah form default submit
+                    }
+                </script>
+
+                <div>
+                    <h2 class="flex items-center text-lg font-semibold text-[#C41E3A] mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        Part 2: GPA
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                        <!-- Semester 1 - 8 Fields -->
+                        <div class="space-y-2">
+                            <label for="semester1" class="block font-medium">
+                                Semester 1<span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" id="semester1" name="semester1" placeholder="e.g., 3.95" 
+                                class="w-full px-3 py-2 border rounded-md bg-white" 
+                                required step="0.01" min="0" max="4">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="semester2" class="block font-medium">
+                                Semester 2
+                            </label>
+                            <input type="number" id="semester2" name="semester2" placeholder="e.g., 3.95" 
+                                class="w-full px-3 py-2 border rounded-md bg-white" 
+                                step="0.01" min="0" max="4">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="semester3" class="block font-medium">
+                                Semester 3
+                            </label>
+                            <input type="number" id="semester3" name="semester3" placeholder="e.g., 3.95" 
+                                class="w-full px-3 py-2 border rounded-md bg-white" 
+                                step="0.01" min="0" max="4">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="semester4" class="block font-medium">
+                                Semester 4
+                            </label>
+                            <input type="number" id="semester4" name="semester4" placeholder="e.g., 3.95" 
+                                class="w-full px-3 py-2 border rounded-md bg-white" 
+                                step="0.01" min="0" max="4">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="semester5" class="block font-medium">
+                                Semester 5
+                            </label>
+                            <input type="number" id="semester5" name="semester5" placeholder="e.g., 3.95" 
+                                class="w-full px-3 py-2 border rounded-md bg-white" 
+                                step="0.01" min="0" max="4">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="semester6" class="block font-medium">
+                                Semester 6
+                            </label>
+                            <input type="number" id="semester6" name="semester6" placeholder="e.g., 3.95" 
+                                class="w-full px-3 py-2 border rounded-md bg-white" 
+                                step="0.01" min="0" max="4">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="semester7" class="block font-medium">
+                                Semester 7
+                            </label>
+                            <input type="number" id="semester7" name="semester7" placeholder="e.g., 3.95" 
+                                class="w-full px-3 py-2 border rounded-md bg-white" 
+                                step="0.01" min="0" max="4">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="semester8" class="block font-medium">
+                                Semester 8
+                            </label>
+                            <input type="number" id="semester8" name="semester8" placeholder="e.g., 3.95" 
+                                class="w-full px-3 py-2 border rounded-md bg-white" 
+                                step="0.01" min="0" max="4">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 mt-6">
+                        <label for="transcript" class="block font-medium">
+                            Upload Transkrip Nilai<span class="text-red-500">*</span>
+                        </label>
+                        <div class="mt-2">
+                            <div class="flex items-center gap-4">
+                                <label class="flex-1">
+                                    <span class="sr-only">Choose file</span>
+                                    <input type="file" id="transcript" name="transcript"
+                                        class="block w-full text-sm text-gray-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-md file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-gray-200 file:text-gray-700
+                                        hover:file:bg-gray-300
+                                        cursor-pointer"
+                                        required
+                                        accept=".pdf">
+                                </label>
+                                <span id="file-name" class="text-sm text-gray-500"></span>
+                            </div>
+                            <p class="mt-1 text-sm text-gray-500">Accepted format: PDF only (max 5MB)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-6">
+                    <button type="button" onclick="window.location.href='RegisterStep1.html'" 
+                        class="px-4 py-2 border border-[#C41E3A] text-[#C41E3A] rounded-md flex items-center hover:bg-red-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Back
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-[#C41E3A] hover:bg-[#A01830] text-white rounded-md">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
