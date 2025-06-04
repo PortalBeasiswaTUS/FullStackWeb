@@ -137,15 +137,6 @@ CREATE TABLE funds_statuses (
     FOREIGN KEY (applications_id) REFERENCES applications(id) ON DELETE CASCADE
 );
 
--- DIKOREKSI: Mengubah user_id menjadi users_id
-SELECT COUNT(*) FROM scholarships WHERE status IN ('open', 'closing soon');
-SELECT COUNT(*) FROM applications WHERE users_id = ?;
-SELECT COUNT(*) FROM applications WHERE users_id = ? AND status = 'pending_review';
-SELECT COUNT(*) FROM applications WHERE users_id = ? AND status = 'rejected';
-SELECT COUNT(*) FROM applications WHERE users_id = ? AND status = 'approved';
-SELECT COUNT(*) FROM scholarships WHERE status IN ('open', 'closing soon') AND deadline BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);
-
-
 CREATE TABLE articles (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255),
