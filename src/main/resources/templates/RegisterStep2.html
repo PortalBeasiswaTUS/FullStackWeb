@@ -16,7 +16,6 @@
             -webkit-appearance: none;
             margin: 0;
         }
-
         input[type="number"] {
             -moz-appearance: textfield;
             appearance: none;
@@ -35,11 +34,12 @@
             </div>
             <p class="text-gray-600 mt-2">Please complete all required fields below to register as a prospective student. All information will remain confidential and used only for official purposes.</p>
         </div>
-
         <div class="p-6 pt-0">
-            <form id="gpaForm" onsubmit="return validateForm(event)" class="space-y-6">
+            <form id="gpaForm" method="POST" onsubmit="return validateForm(event)" class="space-y-6">
                 <script>
                     function validateForm(event) {
+                        event.preventDefault(); // Mencegah form melakukan submit secara default
+                        
                         // Validasi Semester 1 GPA (wajib)
                         const semester1 = document.getElementById('semester1').value;
                         if (!semester1) {
@@ -47,7 +47,7 @@
                             document.getElementById('semester1').focus();
                             return false;
                         }
-
+                        
                         // Validasi nilai GPA (antara 0 dan 4)
                         const gpaInputs = document.querySelectorAll('input[type="number"]');
                         for (const input of gpaInputs) {
@@ -60,86 +60,81 @@
                                 }
                             }
                         }
-
+                        
                         // Validasi file transkrip
-                        const transcript = document.getElementById('transcript');
+                        const transcript = document.getElementById('transcript_path');
                         if (!transcript.files.length) {
                             alert('Please upload your transcript');
                             return false;
                         }
-
                         const file = transcript.files[0];
-                        if (file.type !== 'application/pdf') {
+                        if (file.type !== 'application') {
                             alert('Please upload a PDF file');
                             return false;
                         }
-
                         const maxSize = 5 * 1024 * 1024; // 5MB
                         if (file.size > maxSize) {
                             alert('File size must be less than 5MB');
                             return false;
                         }
-
-                        // Mengambil data dari sessionStorage dan menambahkannya ke form data
-                        const full_name = sessionStorage.getItem('fullName');
+                        
+                        // Ambil data dari sessionStorage
+                        const full_name = sessionStorage.getItem('full_name');
                         const nim = sessionStorage.getItem('nim');
-                        const year_of_entry = sessionStorage.getItem('yearOfEntry');
-                        const study_program = sessionStorage.getItem('studyProgram');
+                        const year_of_entry = sessionStorage.getItem('year_of_entry');
+                        const study_program = sessionStorage.getItem('study_program');
                         const faculty = sessionStorage.getItem('faculty');
                         const email = sessionStorage.getItem('email');
                         const whatsapp = sessionStorage.getItem('whatsapp');
                         const password = sessionStorage.getItem('password');
                         const address = sessionStorage.getItem('address');
-
-                        // Membuat objek JSON untuk dikirim ke backend
-                        let jsonData = {
-                            fullName: full_name,
-                            nim: nim,
-                            yearOfEntry: year_of_entry,
-                            studyProgram: study_program,
-                            faculty: faculty,
-                            email: email,
-                            whatsapp: whatsapp,
-                            password: password,
-                            address: address,
-                            semester1: document.getElementById('semester2').value,
-                            semester2: document.getElementById('semester2').value,
-                            semester3: document.getElementById('semester3').value,
-                            semester4: document.getElementById('semester4').value,
-                            semester5: document.getElementById('semester5').value,
-                            semester6: document.getElementById('semester6').value,
-                            semester7: document.getElementById('semester7').value,
-                            semester8: document.getElementById('semester8').value,
-                            transcript: transcript.files[0]
-                        };
-
-                        // Kirim data menggunakan AJAX
-                        fetch('/api/users/register', {
+                        
+                        // Membuat FormData untuk mengirim data dan file
+                        const formData = new FormData();
+                        formData.append('full_name', full_name);
+                        formData.append('nim', nim);
+                        formData.append('year_of_entry', year_of_entry);
+                        formData.append('study_program', study_program);
+                        formData.append('faculty', faculty);
+                        formData.append('email', email);
+                        formData.append('whatsapp', whatsapp);
+                        formData.append('password', password);
+                        formData.append('address', address);
+                        formData.append('semester1', document.getElementById('semester1').value);
+                        formData.append('semester2', document.getElementById('semester2').value || '');
+                        formData.append('semester3', document.getElementById('semester3').value || '');
+                        formData.append('semester4', document.getElementById('semester4').value || '');
+                        formData.append('semester5', document.getElementById('semester5').value || '');
+                        formData.append('semester6', document.getElementById('semester6').value || '');
+                        formData.append('semester7', document.getElementById('semester7').value || '');
+                        formData.append('semester8', document.getElementById('semester8').value || '');
+                        formData.append('transcript_path', transcript.files[0]);
+                        
+                        // Kirim data ke backend
+                        fetch('/api/users/registerStep2', {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(jsonData)
+                            body: formData
                         })
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                alert('Data successfully saved!');
-                                window.location.href = 'AdminUser.html'; // Redirect to AdminUser page
+                                // Redirect ke halaman AdminUser setelah registrasi berhasil
+                                window.location.href = data.redirectUrl;
                             } else {
-                                alert('Error: ' + data.message);
+                                alert('Error: ' + data.message);  // Tampilkan pesan error jika terjadi kesalahan
                             }
                         })
-                        .catch(error => console.error('Error:', error));
-
-                        return false; // Mencegah form default submit
+                        .catch(error => {
+                            console.error('Error:', error);  // Tangani error yang terjadi dalam jaringan atau lainnya
+                            alert('Network error: ' + error.message);
+                        });
+                        return false;  // Mencegah form default submit
                     }
                 </script>
-
                 <div>
                     <h2 class="flex items-center text-lg font-semibold text-[#C41E3A] mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                         Part 2: GPA
                     </h2>
@@ -154,7 +149,6 @@
                                 class="w-full px-3 py-2 border rounded-md bg-white" 
                                 required step="0.01" min="0" max="4">
                         </div>
-
                         <div class="space-y-2">
                             <label for="semester2" class="block font-medium">
                                 Semester 2
@@ -163,7 +157,6 @@
                                 class="w-full px-3 py-2 border rounded-md bg-white" 
                                 step="0.01" min="0" max="4">
                         </div>
-
                         <div class="space-y-2">
                             <label for="semester3" class="block font-medium">
                                 Semester 3
@@ -172,7 +165,6 @@
                                 class="w-full px-3 py-2 border rounded-md bg-white" 
                                 step="0.01" min="0" max="4">
                         </div>
-
                         <div class="space-y-2">
                             <label for="semester4" class="block font-medium">
                                 Semester 4
@@ -181,7 +173,6 @@
                                 class="w-full px-3 py-2 border rounded-md bg-white" 
                                 step="0.01" min="0" max="4">
                         </div>
-
                         <div class="space-y-2">
                             <label for="semester5" class="block font-medium">
                                 Semester 5
@@ -190,7 +181,6 @@
                                 class="w-full px-3 py-2 border rounded-md bg-white" 
                                 step="0.01" min="0" max="4">
                         </div>
-
                         <div class="space-y-2">
                             <label for="semester6" class="block font-medium">
                                 Semester 6
@@ -199,7 +189,6 @@
                                 class="w-full px-3 py-2 border rounded-md bg-white" 
                                 step="0.01" min="0" max="4">
                         </div>
-
                         <div class="space-y-2">
                             <label for="semester7" class="block font-medium">
                                 Semester 7
@@ -208,7 +197,6 @@
                                 class="w-full px-3 py-2 border rounded-md bg-white" 
                                 step="0.01" min="0" max="4">
                         </div>
-
                         <div class="space-y-2">
                             <label for="semester8" class="block font-medium">
                                 Semester 8
@@ -218,16 +206,15 @@
                                 step="0.01" min="0" max="4">
                         </div>
                     </div>
-
                     <div class="space-y-2 mt-6">
-                        <label for="transcript" class="block font-medium">
+                        <label for="transcript_path" class="block font-medium">
                             Upload Transkrip Nilai<span class="text-red-500">*</span>
                         </label>
                         <div class="mt-2">
                             <div class="flex items-center gap-4">
                                 <label class="flex-1">
                                     <span class="sr-only">Choose file</span>
-                                    <input type="file" id="transcript" name="transcript"
+                                    <input type="file" id="transcript_path" name="transcript_path"
                                         class="block w-full text-sm text-gray-500
                                         file:mr-4 file:py-2 file:px-4
                                         file:rounded-md file:border-0
@@ -244,7 +231,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="flex justify-between mt-6">
                     <button type="button" onclick="window.location.href='RegisterStep1.html'" 
                         class="px-4 py-2 border border-[#C41E3A] text-[#C41E3A] rounded-md flex items-center hover:bg-red-50">
@@ -260,5 +246,13 @@
             </form>
         </div>
     </div>
+
+    <script>
+        // Menampilkan nama file yang diupload
+        document.getElementById('transcript_path').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
 </body>
 </html>

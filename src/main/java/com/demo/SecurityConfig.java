@@ -3,31 +3,29 @@ package com.demo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain; // Tambahkan ini
-
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // Menyediakan PasswordEncoder untuk enkripsi password
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests()  // Gunakan authorizeHttpRequests() untuk menggantikan authorizeRequests()
-                .requestMatchers("/api/auth/register", "/api/auth/login", "/RegisterStep1.html", "/RegisterStep2.html", "/static/**").permitAll()  // Endpoints tanpa autentikasi
-                .anyRequest().authenticated()  // Semua request lain harus terautentikasi
-            .and()
-            .csrf().disable();  // Nonaktifkan CSRF jika tidak diperlukan
+            .csrf().disable() // Disable CSRF untuk memudahkan testing API, sesuaikan di production
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/api/users/registerStep1",
+                    "/api/users/registerStep2",
+                    "/uploads/**",
+                    "/css/**",
+                    "/js/**",
+                    "/",
+                    "/**.html"
+                ).permitAll() // Izinkan akses bebas untuk register dan resource statis
+                .anyRequest().authenticated() // Endpoint lain butuh otentikasi
+            )
+.csrf(csrf -> csrf.disable());// Aktifkan HTTP Basic Auth jika perlu (bisa dihapus jika tidak mau)
 
-        return http.build();  // Kembalikan konfigurasi HTTP yang sudah dibangun
+        return http.build();
     }
 }
-

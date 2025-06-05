@@ -29,7 +29,7 @@
         </div>
 
         <div class="p-6 pt-0">
-            <form id="registerForm" onsubmit="return validateRegisterForm(event)">
+            <form id="registerForm" action="/users/registerStep1" method="POST" onsubmit="return validateRegisterForm(event)">
                 <script>
                     function validateRegisterForm(event) {
                         event.preventDefault(); // Mencegah form melakukan submit secara default
@@ -106,7 +106,7 @@
                             };
 
                             // Kirim data ke backend (ganti dengan endpoint backend kamu)
-                            fetch('http://localhost:8080/api/users/register', {  // Menggunakan endpoint register
+                            fetch('http://localhost:8080/api/users/registerStep1', {  // Menggunakan endpoint register
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -116,7 +116,7 @@
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
-                                    window.location.href = 'RegisterStep2.html';  // Mengarahkan ke halaman berikutnya setelah registrasi berhasil
+                                    window.location.href = '/users/registerStep2';  // Redirect ke endpoint controller untuk halaman step 2
                                 } else {
                                     alert('Gagal mengirimkan formulir');  // Menampilkan pesan jika terjadi kesalahan
                                 }
@@ -124,6 +124,7 @@
                             .catch(error => {
                                 console.error('Error:', error);  // Menampilkan error jika ada masalah jaringan atau lainnya
                             });
+
                         }
                     }
                 </script>

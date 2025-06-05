@@ -2,9 +2,16 @@ package com.demo.repository;
 
 import com.demo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.Optional;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    // Menambahkan query untuk mencari user berdasarkan email
-    Optional<User> findByEmail(String email);
+    
+    boolean existsByEmail(String email);
+
+    boolean existsByNim(String nim);
+    
+    // Tambahkan method ini:
+    User findByNim(String nim);
+
 }
